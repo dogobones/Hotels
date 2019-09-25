@@ -1,6 +1,6 @@
 const router = require('express').Router();
-
-const customerController = require('../controllers/customerController');
+const path = require('path');
+const customerController = require(path.join('..','controllers','customerController'));
 
 router.get('/', customerController.list);
 router.post('/add', customerController.save);

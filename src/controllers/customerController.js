@@ -1,3 +1,6 @@
+const path = require('path');
+const pool = require(path.join('..','db'));
+
 const controller = {};
 
 controller.list = (req, res) => {
@@ -57,5 +60,59 @@ controller.delete = (req, res) => {
     });
   });
 }
+
+/*router.get('/', (req, res) => {
+
+    res.render('index');
+
+});
+
+router.get('/home', async (req, res) => {
+
+    const rooms = await pool.query("SELECT * FROM rooms");
+
+    res.json(rooms);
+
+});
+
+router.post('/room', async (req, res) => {
+
+    //Set the host socket id in the table
+    const settings = checkSettings(req.body);
+
+    const values = [
+        settings.roomName,
+        settings.boardSize,
+        settings.gameMode,
+        settings.match,
+        settings.timeMode,
+        settings.timeDuration,
+        settings.starter
+    ];
+
+    const { insertId } = await pool.query(
+        "INSERT INTO rooms (roomName, boardSize, gameMode, match_, timeMode, timeDuration, starter) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?)", values
+    );
+
+    res.json(insertId);
+
+});
+
+router.get('/room/:roomId', async (req, res) => {
+
+    const room = await pool.query("SELECT * FROM rooms WHERE id = ?", req.params.roomId);
+
+    if(room[0] == null) {
+
+        res.render('index');
+
+    } else {
+
+        res.render('room', room[0]);
+
+    }
+
+});*/
 
 module.exports = controller;
