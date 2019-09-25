@@ -1,5 +1,93 @@
 {{> navbar }}
-<main>
-    <h1>{{ data }}</h1>
+<div class="" style="height:20vh;">
+<br>
+</div>
+<main role="main" class="cover ">
+<div class="row">
+<div class="text-center cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<h1 class="cover-heading text-white">Empieza aquí</h1><br>
+<p class="lead text-white">Monitorea los equipos activos de los sitios.</p>
+<div class="lead">
+<div id="Escogersitio"class="ui inverted animated orange button" tabindex="0" >
+<div class="visible content">Escoger sitio</div>
+<div class="hidden content">
+  <i class="fas fa-building"></i>
+</div>
+</div>
+<div id="Añadirsitio"class="ui inverted animated green button" tabindex="0" >
+<div class="visible content">Añadir sitio</div>
+<div class="hidden content">
+ <i class="fas fa-plus-square"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
 </main>
+<div id="modalañadir"class="modal fade" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title"><i class="fas fa-map-marked"></i>&nbsp; Añadir un nuevo sitio</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        <span class="input-group-text">Nombre:</span>
+        </div>
+        <form  enctype="multipart/form-data" method="POST">
+
+        <input id="nombreSitio" name="nombreSitio"type="text" class="form-control" placeholder="Nombre del sitio" aria-label="Nombre del área">
+      </div>
+      <div class="mb-3">
+
+          <div class="form-group">
+          <div id="dropzone_logo" name="dropzone_logo" class="dropzone"></div>
+          </div>
+        <!--<label for="LogoFile" class="file-upload btn btn-warning btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccione el logo...
+            <input id="LogoFile" type="file" onchange="return fileValidation()">
+        </label>-->
+      </div>
+      <hr class="separator">
+      <div class="input-group mb-3">
+        <label for="MapFile" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccionar el mapa...
+            <input id="MapFile" name="MapFile" type="file">
+        </label>
+      </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="button" id="guardarsitio" class="btn btn-primary ui"  data-tooltip="Al hacer clic se guardaran los cambios" data-position="top left">Guardar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="modalEscoger" accesskey=""class="modal fade" tabindex="-1" role="dialog">
+<div class="d-flex mx-auto">
+<div class="modal-dialog" >
+  <div class="modal-content" style="background:transparent;">
+      <h3 class="text-white text-center pb-3"> Sitios disponibles </h3>
+      <div class="row">
+    <div class="empresa pl-2">
+      <img class="BnW " src="http://placehold.it/150x150/17A0B5/FFFFFF?text=Logo" />
+    </div>
+    <div class="empresa pl-2">
+      <img class="BnW" src="http://placehold.it/150x150/FF7701/FFFFFF?text=Logo" />
+    </div>
+    <div class="empresa pl-2">
+      <img class="BnW" src="http://placehold.it/150x150/27A343/FFFFFF?text=Logo" />
+    </div>
+  </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<script src="/js/home/home.js" charset="utf-8"></script>
 {{> footer }}
