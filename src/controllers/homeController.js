@@ -20,12 +20,12 @@ if(req.files!=undefined){
  //console.log(req.files.MapFile);
     var fileMap = req.files.MapFile;
     fileMap.mv(`./src/public/img/${fileMap.name}`);
-    rutaMapa=`/img/${fileMapa.name}`;
+    rutaMapa=`/img/${fileMap.name}`;
   }
 }
 let nombreSitio = req.body.nombreSitio;
 //console.log(nombreSitio);
-const query = await pool.query("INSERT INTO Hoteles(nombre,mapa,logo) values(?,?,?)",[nombreSitio,rutaLogo,rutaMapa]);
+const query = await pool.query("INSERT INTO Hoteles(nombre,mapa,logo) values(?,?,?)",[nombreSitio,rutaMapa,rutaLogo]);
 
 res.redirect('/editsite/'+query.insertId);
 
