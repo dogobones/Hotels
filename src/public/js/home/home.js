@@ -15,6 +15,7 @@ location.href ="/editsite";//TEMPORAL, hay que añadir la ruta al controlador
 });
 
 });
+/*
 function fileValidation(fileInput){
 var fileInput = $('#LogoFile');
 var filePath = $('#LogoFile').value;
@@ -30,4 +31,4 @@ if(extension != 'jpg'&& extension != 'jpeg' && extension != 'png'){
   console.log("Correcto");
 
 }
-}
+}*/

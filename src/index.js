@@ -3,6 +3,8 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const socketio = require('socket.io');
+const fileupload = require('express-fileupload');
+
 const app = express();
 
 require('dotenv').config();
@@ -27,6 +29,7 @@ app.set('view engine', '.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(fileupload());
 
 // Routes
 app.use('/', require(path.join(__dirname, 'routes', 'web')));

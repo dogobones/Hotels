@@ -1,4 +1,3 @@
-{{> navbar }}
 <div class="" style="height:20vh;">
 <br>
 </div>
@@ -34,35 +33,31 @@
       </button>
     </div>
     <div class="modal-body">
+      <form  enctype="multipart/form-data" method="POST" action="/createsite" >
       <div class="input-group mb-3">
         <div class="input-group-prepend">
         <span class="input-group-text">Nombre:</span>
         </div>
-        <form  enctype="multipart/form-data" method="POST">
-
         <input id="nombreSitio" name="nombreSitio"type="text" class="form-control" placeholder="Nombre del sitio" aria-label="Nombre del área">
       </div>
       <div class="mb-3">
-
-          <div class="form-group">
-          <div id="dropzone_logo" name="dropzone_logo" class="dropzone"></div>
-          </div>
-        <!--<label for="LogoFile" class="file-upload btn btn-warning btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccione el logo...
-            <input id="LogoFile" type="file" onchange="return fileValidation()">
-        </label>-->
+        <label for="LogoFile" class="file-upload btn btn-warning btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccione el logo..
+            <input id="LogoFile" name="LogoFile" type="file">
+        </label>
       </div>
       <hr class="separator">
       <div class="input-group mb-3">
         <label for="MapFile" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccionar el mapa...
             <input id="MapFile" name="MapFile" type="file">
         </label>
-      </form>
+
       </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="button" id="guardarsitio" class="btn btn-primary ui"  data-tooltip="Al hacer clic se guardaran los cambios" data-position="top left">Guardar</button>
+      <button type="submit" id="guardarsitio" class="btn btn-primary ui submit"  data-tooltip="Al hacer clic se guardaran los cambios" data-position="top left">Guardar</button>
     </div>
+    </form>
   </div>
 </div>
 </div>
@@ -90,4 +85,3 @@
 </div>
 
 <script src="/js/home/home.js" charset="utf-8"></script>
-{{> footer }}

@@ -14,4 +14,8 @@ const dashboardController = require(path.join('..','controllers','dashboardContr
 router.get('/editsite', dashboardController.editsite);
 //router.post('/salvarMovimientos', dashboardController.salvarMovimientos);
 
+const homeController = require(path.join('..','controllers','homeController'));
+router.post('/createsite',homeController.createsite);
+
+
 module.exports = router;
