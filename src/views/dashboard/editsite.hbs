@@ -1,0 +1,160 @@
+{{> navbar }}
+
+<div class="row pl-3 pr-3">
+<div class="mx-auto pb-2">
+  <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar área</button>
+  <button type="button" class="btn btn-sm btn-outline-warning"><i class="fas fa-th-list"></i> Vista general</button>
+  <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-success"><i class="fas fa-arrows-alt"></i> Salvar movimientos</button>
+</div>
+  <div id="containment-wrapper" style="width: 100%; height: 78vh; min-height: 400px;">
+    <div id="mapa" style="border-radius: 10px; border: 2px solid #333333;">
+
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="AgregarArea" tabindex="-1" role="dialog" aria-labelledby="AgregarAreaLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AgregarAreaLabel"><i class="fas fa-plus-square"></i> Agregar área</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+  		<div class="input-group mb-3">
+  		  <div class="input-group-prepend">
+  			<span class="input-group-text">Nombre:</span>
+  		  </div>
+  		  <input id="nombreArea" type="text" class="form-control" placeholder="Nombre del área" aria-label="Nombre del área">
+  		</div>
+  		<div class="input-group mb-3">
+  		  <div class="input-group-prepend">
+  			<span class="input-group-text">Equipos activos en el área:</span>
+  		  </div>
+  		  <select id="equipos" class="form-control" style="width: 100%;" multiple="multiple">
+  		    <option>Antena número 1</option>
+  		    <option>Switch Cisco 2660</option>
+  		    <option>Antena de largo alcance</option>
+  		  </select>
+  		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button id="AgregarAreaButton" type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  $( function() {
+
+    $.contextMenu({
+        selector: '.ui-widget-content',
+        callback: function(key, options) {
+            var m = "clicked: " + key;
+            window.console && console.log(m) || alert(m);
+        },
+        items: {
+            "ver": {name: "Ver detalles", icon: "fas fa-eye"},
+            "nombre": {name: "Cambiar nombre", icon: "fas fa-edit"},
+            "equipos": {name: "Gestionar equipos", icon: "fas fa-broadcast-tower"},
+            "split": "---------",
+            "eliminar": {name: "Eliminar área", icon: "fas fa-trash-alt"}
+        }
+    });
+
+    $('.ui-widget-content').on('click', function(e){
+        console.log('clicked', this);
+    })
+
+  var aux = 1;
+
+  $("#equipos").select2({
+    placeholder: 'Ninguno',
+    allowClear: true
+  });
+
+  $( "#mapa" ).draggable({
+    containment: "#containment-wrapper"
+    });
+
+  $( "#mapa" ).resizable({
+    containment: "#containment-wrapper",
+    minHeight: 250,
+    minWidth: 400
+  });
+
+  $("#AgregarAreaButton").click(function() {
+
+    $("#mapa").append( "<div id='piso"+aux+"' class='ui-widget-content resizable blink' style='overflow: hidden; background-color:#1DB28C; border-color:#1DE0AF;'></p>" );
+
+    $("#AgregarArea").modal("hide");
+
+    $( ".resizable" ).draggable({
+      containment: "#mapa",
+      snap: true
+      });
+    $( ".resizable" ).resizable({
+      containment: "#mapa",
+      minHeight: 80,
+      minWidth: 80
+    });
+
+    $("#piso"+aux).append("<div style='font-weight: bold; margin-top: -18px; text-align: left; font-size: 24px;'><p style='line-height : 24px;'>"+$("#nombreArea").val()+"</p></div>");
+
+    $("#nombreArea").val("");
+    $("#equipos").val(null).trigger('change');
+
+    aux++;
+
+  });
+
+  //AJAX ACTIONS
+
+  var sitio = 1; //Dinamic data
+
+  $("#mapa").css("left", "{{ hotel.left }}%");
+  $("#mapa").css("top", "{{ hotel.top }}%");
+  $("#mapa").css("width", "{{ hotel.width }}%");
+  $("#mapa").css("height", "{{ hotel.height }}%");
+  $("#mapa").css("background-image","linear-gradient(rgba(0, 0, 0, 0.350),rgba(0, 0,0, 0.350)),url('img/example.jpg')");
+  $("#mapa").css("background-position", "center center");
+  $("#mapa").css("background-repeat", "no-repeat");
+  $("#mapa").css("background-size", "100% 100%");
+  $("#mapa").css("background-color", "black");
+
+  $("#salvarMovimientos").click(function() {
+
+    var anchoBase = $("#containment-wrapper").width();
+    var largoBase = $("#containment-wrapper").height();
+    var anchoMapa = $("#mapa").width();
+    var largoMapa = $("#mapa").height();
+    var leftMapa = $("#mapa").css("left").split("px")[0];
+    var topMapa = $("#mapa").css("top").split("px")[0];
+    if(parseInt(leftMapa) < 0) leftMapa = 0;
+    if(parseInt(topMapa) < 0) topMapa = 0;
+    var width = Math.round(((anchoMapa * 100)/anchoBase));
+    var height = Math.round(((largoMapa * 100)/largoBase));
+    var left = Math.round(((leftMapa * 100)/anchoBase));
+    var top = Math.round(((topMapa * 100)/largoBase));
+
+    $.ajax({
+        type: "POST",
+        url: "/salvarMovimientos",
+        data: { sitio: sitio, width: width, height: height, left: left, top: top  },
+        success: function (data){
+          alert("Cambios salvados!!!");
+        },
+        error: function (data) {
+          alert("Error crítico!!!");
+        }
+    });
+
+  });
+
+  });
+  </script>
+  </div>
+
+{{> footer }}
