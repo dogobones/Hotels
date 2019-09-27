@@ -1,8 +1,8 @@
 <div class="row pl-3 pr-3">
   <div class="mx-auto pb-2">
-    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar área</button>
+    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar área</button>
     <button type="button" class="btn btn-sm btn-outline-warning"><i class="fas fa-th-list"></i> Vista general</button>
-    <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-success"><i class="fas fa-arrows-alt"></i> Salvar movimientos</button>
+    <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info"><i class="fas fa-arrows-alt"></i> Sincronizar cambios</button>
   </div>
   <div id="containment-wrapper" style="width: 100%; height: 78vh; min-height: 400px;">
     <div id="mapa" style="border-radius: 10px; border: 2px solid #333333;">
@@ -27,6 +27,16 @@
   		</div>
   		<div class="input-group mb-3">
   		  <div class="input-group-prepend">
+  			<span class="input-group-text">Estado actual:</span>
+  		  </div>
+        <select id="estado" class="form-control">
+  		    <option value="1" selected>Dispinible</option>
+  		    <option value="2">Ocupada</option>
+  		    <option value="0">No disponible</option>
+  		  </select>
+  		</div>
+  		<div class="input-group mb-3">
+  		  <div class="input-group-prepend">
   			<span class="input-group-text">Equipos activos en el área:</span>
   		  </div>
   		  <select id="equipos" class="form-control" style="width: 100%;" multiple="multiple">
@@ -43,31 +53,20 @@
       </div>
     </div>
   </div>
+  <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   <script>
+
+    const socket = io();
+
+    var hotel_id = {{ hotel.id }};
+
+    socket.emit('init', {
+
+        hotel_id: hotel_id
+
+    });
+
     $(function() {
-
-      //Script Context Menu
-
-      $.contextMenu({
-          selector: '.ui-widget-content',
-          callback: function(key, options) {
-              var m = "clicked: " + key;
-              window.console && console.log(m) || alert(m);
-          },
-          items: {
-              "ver": {name: "Ver detalles", icon: "fas fa-eye"},
-              "nombre": {name: "Cambiar nombre", icon: "fas fa-edit"},
-              "equipos": {name: "Gestionar equipos", icon: "fas fa-broadcast-tower"},
-              "split": "---------",
-              "eliminar": {name: "Eliminar área", icon: "fas fa-trash-alt"}
-          }
-      });
-
-      $('.ui-widget-content').on('click', function(e){
-          console.log('clicked', this);
-      })
-
-      //Script Default
 
       $("#equipos").select2({
         placeholder: 'Ninguno',
@@ -84,38 +83,24 @@
         minWidth: 400
       });
 
-      //Script Agregar Area
-      
-      var aux = 1;
+    });
 
-      $("#AgregarAreaButton").click(function() {
-
-        $("#mapa").append( "<div id='piso"+aux+"' class='ui-widget-content resizable blink' style='overflow: hidden; background-color:#1DB28C; border-color:#1DE0AF;'></p>" );
-
-        $("#AgregarArea").modal("hide");
-
-        $( ".resizable" ).draggable({
-          containment: "#mapa",
-          snap: true
-          });
-        $( ".resizable" ).resizable({
-          containment: "#mapa",
-          minHeight: 30,
-          minWidth: 30
-        });
-
-        $("#piso"+aux).append("<div style='font-weight: bold; margin-top: -18px; text-align: left; font-size: 24px;'><p style='line-height : 24px;'>"+$("#nombreArea").val()+"</p></div>");
-
-        $("#nombreArea").val("");
-        $("#equipos").val(null).trigger('change');
-
-        aux++;
-
-      });
+  </script>
+  <script src="/js/dashboard/context-menu.js"></script>
+  <script src="/js/dashboard/areas.js"></script>
+  <script>
+    $(function() {
 
       //Script Movimientos
 
-      var sitio = {{ hotel.id }};
+      $(window).resize(function(){
+
+        var alto=$(window).height();
+        var ancho=$(window).width();
+
+        console.log("alto: "+alto+" ancho:"+ancho);
+
+      });
 
       $("#mapa").css("left", "{{ hotel.left }}%");
       $("#mapa").css("top", "{{ hotel.top }}%");
@@ -143,15 +128,17 @@
         var top = Math.round(((topMapa * 100)/largoBase));
 
         $.ajax({
+
             type: "POST",
             url: "/salvarMovimientos",
-            data: { sitio: sitio, width: width, height: height, left: left, top: top  },
+            data: { sitio: hotel_id, width: width, height: height, left: left, top: top  },
             success: function (data){
               alert("Cambios salvados!!!");
             },
             error: function (data) {
               alert("Error crítico!!!");
             }
+            
         });
 
       });

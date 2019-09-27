@@ -45,6 +45,6 @@ const server = app.listen(app.get('port'), () => {
 });
 
 // Websockets
-/*const io = socketio(server);
+const io = socketio(server);
 
-require(path.join(__dirname, '.', 'socket'))(io);*/
+require(path.join(__dirname, '.', 'socket'))(io);

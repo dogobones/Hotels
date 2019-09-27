@@ -15,6 +15,7 @@ router.get('/editsite/:hotelId', dashboardController.editsite);
 router.post('/salvarMovimientos', dashboardController.salvarMovimientos);
 
 const homeController = require(path.join('..','controllers','homeController'));
+
 router.post('/createsite',homeController.createsite);
 
 
