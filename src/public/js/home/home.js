@@ -14,6 +14,10 @@ $('#Escogersitio').click(function(){
 
 
         $("#sitesContainer").append( "<div id="+element.id+" class='empresa p-1' ><img class='BnW' style='width:9.4em; height: 9.4em' src= "+element.logo+" alt=''></div>" );
+        $('.BnW').on('error',function(){          
+          $(this).attr('src','/img/logos/DefaultLogo.png');
+
+        });
         $('#'+element.id).on('click',function(e){
           //console.log('clicked', this.id);
 
