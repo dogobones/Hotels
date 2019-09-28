@@ -12,15 +12,15 @@ if(req.files!=undefined){
  if(req.files.LogoFile!=undefined) {
 //console.log(req.files.LogoFile);
   var fileLogo = req.files.LogoFile;
-   fileLogo.mv(`./src/public/img/${fileLogo.name}`);
-   rutaLogo=`/img/${fileLogo.name}`;
+   fileLogo.mv(`./src/public/img/logos/${fileLogo.name}`);
+   rutaLogo=`/img/logos/${fileLogo.name}`;
  }
 
  if(req.files.MapFile!=undefined) {
  //console.log(req.files.MapFile);
     var fileMap = req.files.MapFile;
-    fileMap.mv(`./src/public/img/${fileMap.name}`);
-    rutaMapa=`/img/${fileMap.name}`;
+    fileMap.mv(`./src/public/img/mapas/${fileMap.name}`);
+    rutaMapa=`/img/mapas/${fileMap.name}`;
   }
 }
 let nombreSitio = req.body.nombreSitio;
@@ -32,4 +32,12 @@ res.redirect('/editsite/'+query.insertId);
 
 
 };
+
+controller.searchallsites= async(req, res)=>{
+const hotels = await pool.query("SELECT * FROM Hoteles");
+//console.log(hotels);
+res.json(hotels);
+}
+
+
 module.exports = controller;

@@ -17,6 +17,6 @@ router.post('/salvarMovimientos', dashboardController.salvarMovimientos);
 const homeController = require(path.join('..','controllers','homeController'));
 
 router.post('/createsite',homeController.createsite);
-
+router.post('/searchallsites',homeController.searchallsites);
 
 module.exports = router;
