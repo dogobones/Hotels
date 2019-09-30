@@ -10,11 +10,10 @@ $('#Escogersitio').click(function(){
     //data:"",
     success:function(data){
       //console.log(data);
-      data.forEach(function(element){
-
-
-        $("#sitesContainer").append( "<div id="+element.id+" class='empresa p-1' ><img class='BnW' style='width:9.4em; height: 9.4em' src= "+element.logo+" alt=''></div>" );
-        $('.BnW').on('error',function(){          
+      $('#sitesContainer').html('');
+      data.forEach(function(element){  
+        $("#sitesContainer").append( "<div id="+element.id+" class='empresa p-1 "+element.nombre+ "'  ><img class='BnW' style='width:9.4em; height: 9.4em' src= "+element.logo+" alt=''></div>" );
+        $('.BnW').on('error',function(){
           $(this).attr('src','/img/logos/DefaultLogo.png');
 
         });

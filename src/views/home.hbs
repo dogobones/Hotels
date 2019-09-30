@@ -63,11 +63,19 @@
 </div>
 </div>
 
-<div id="modalEscoger" accesskey=""class="modal fade" tabindex="-1" role="dialog">
-<div class="d-flex mx-auto ">
+<div id="modalEscoger" class="modal fade" tabindex="-1" role="dialog">
+<div class=" ">
 <div class="modal-dialog"  >
-  <div class="modal-content " style="background:transparent;">
-      <h3 class="text-white text-center pb-3"> Sitios disponibles </h3>
+  <div class="modal-content" style="background:transparent;">
+    <div class="modal-header d-flex mx-auto" style="background:transparent; border:none;">
+      <h3 class="text-white"> Sitios disponibles </h3>
+      <button type="button" class="close" data-dismiss="modal" name="button">
+        <span class="text-white" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="row">
+    <input id="searchsite" class="form-control mr-sm-2 border-primary" type="search" placeholder="Search" aria-label="Search" style="background:transparent;">
+    </div>
     <div id="sitesContainer"class="row"></div>
   </div>
 
@@ -76,36 +84,34 @@
 </div>
 
 <script src="/js/home/home.js" charset="utf-8"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/search.min.js" charset="utf-8"></script>
+
 <style media="screen">
-/*
-*  STYLE 6
-*/
-
-#style-6::-webkit-scrollbar-track
-{
--webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-background-color: #F5F5F5;
+input[type=search] {
+width: 130px;
+-webkit-transition: width 0.4s ease-in-out;
+transition: width 0.4s ease-in-out;
+color: white !important;
 }
-
-#style-6::-webkit-scrollbar
-{
-width: 10px;
-background-color: #F5F5F5;
+/* Cuando esta seleccionado el input su ancho cambia a 100% */
+input[type=search]:focus {
+  width: 90%;
 }
-
-#style-6::-webkit-scrollbar-thumb
-{
-background-color: #F90;
-background-image: -webkit-linear-gradient(45deg,
-                                          rgba(255, 255, 255, .2) 25%,
-                      transparent 25%,
-                      transparent 50%,
-                      rgba(255, 255, 255, .2) 50%,
-                      rgba(255, 255, 255, .2) 75%,
-                      transparent 75%,
-                      transparent)
-}
-
 </style>
+<script>
+$(function(){
+
+   $('#searchsite').on("change paste keyup",function(){
+    var search=$('#searchsite').val();
+    //console.log(search);
+    if(search==''){
+      $('#sitesContainer > div').fadeIn(450);
+    }else{
+      //if(){}
+      //console.log(txtValue);
+      var select=$('.'+search).fadeIn(450);
+      $('#sitesContainer > div').not(select).hide();
+    }
+  });
+
+});
+</script>
