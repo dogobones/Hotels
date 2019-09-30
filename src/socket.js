@@ -30,6 +30,17 @@ module.exports = io => {
 
         });
 
+        socket.on('sincronizacion', async (data) => {
+
+          await pool.query("UPDATE Hoteles SET `left` = ?, top = ?, width = ?, height = ? WHERE id = ?", [
+            data.left, data.top, datay.width, data.height, data.sitio
+          ]);
+          console.log(data.allAreas);
+
+          //io.in(data.hotel_id).emit('actualizarAreas', areas);
+
+        });
+
         socket.on('disconnect', async () => {
 
             console.log('User down: ', socket.id);

@@ -59,6 +59,13 @@
     const socket = io();
 
     var hotel_id = {{ hotel.id }};
+    var width = {{ hotel.width }};
+    var height = {{ hotel.height }};
+    var left = {{ hotel.left }};
+    var top = {{ hotel.top }};
+    var hotel_mapa = "{{ hotel.mapa }}";
+
+    var allAreas = null;
 
     $(window).load(function() {
 
@@ -77,22 +84,16 @@
 
   </script>
   <script src="/js/dashboard/context-menu.js"></script>
-  <script src="/js/dashboard/areas.js"></script>
   <script>
     $(window).load(function() {
 
       //Script Movimientos
 
-      var width = {{ hotel.width }};
-      var height = {{ hotel.height }};
-      var left = {{ hotel.left }};
-      var top = {{ hotel.top }};
-
       $("#mapa").css("width", width + "%");
       $("#mapa").css("height", height + "%");
       $("#mapa").css("left", left + "%");
       $("#mapa").css("top", top + "%");
-      $("#mapa").css("background-image", "linear-gradient(rgba(0, 0, 0, 0.350), rgba(0, 0,0, 0.350)), url('{{ hotel.mapa }}')");
+      $("#mapa").css("background-image", "linear-gradient(rgba(0, 0, 0, 0.350), rgba(0, 0,0, 0.350)), url(" + hotel_mapa + ")");
       $("#mapa").css("background-position", "center center");
       $("#mapa").css("background-repeat", "no-repeat");
       $("#mapa").css("background-size", "100% 100%");
@@ -100,17 +101,17 @@
 
       $( "#mapa" ).draggable({
         containment: "#containment-wrapper",
-        stop: function(e, ui) { ajustarMapa(); }
+        stop: function(e, ui) { ajustarMapa(1); }
       });
 
       $( "#mapa" ).resizable({
         containment: "#containment-wrapper",
         minHeight: 250,
         minWidth: 400,
-        stop: function(e, ui) { ajustarMapa(); }
+        stop: function(e, ui) { ajustarMapa(2); }
       });
 
-      function ajustarMapa() {
+      function ajustarMapa(action) {
 
         var anchoBase = $("#containment-wrapper").width();
         var largoBase = $("#containment-wrapper").height();
@@ -126,26 +127,26 @@
         left = Math.ceil(((leftMapa * 100) / anchoBase));
         top = Math.ceil(((topMapa * 100) / largoBase));
 
-        $("#mapa").css("width", width + "%");
-        $("#mapa").css("height", height + "%");
-        $("#mapa").css("left", left + "%");
-        $("#mapa").css("top", top + "%");
+        if(action == 1) {
+          $("#mapa").css("left", left + "%");
+          $("#mapa").css("top", top + "%");
+        } else {
+          $("#mapa").css("width", width + "%");
+          $("#mapa").css("height", height + "%");
+        }
 
       }
 
       $("#salvarMovimientos").click(function() {
 
-        $.ajax({
+        socket.emit('sincronizacion', {
 
-            type: "POST",
-            url: "/salvarMovimientos",
-            data: { sitio: hotel_id, width: width, height: height, left: left, top: top  },
-            success: function (data){
-              alert("Cambios salvados!!!");
-            },
-            error: function (data) {
-              alert("Error crítico!!!");
-            }
+            sitio: hotel_id,
+            width: width,
+            height: height,
+            left: left,
+            top: top,
+            areas: allAreas
 
         });
 
@@ -153,4 +154,5 @@
 
     });
   </script>
+  <script src="/js/dashboard/areas.js"></script>
 </div>

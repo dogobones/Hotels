@@ -10,11 +10,4 @@ controller.editsite = async (req, res) => {
     });
 };
 
-controller.salvarMovimientos = async (req, res) => {
-    await pool.query("UPDATE Hoteles SET `left` = ?, top = ?, width = ?, height = ? WHERE id = ?", [
-      req.body.left, req.body.top, req.body.width, req.body.height, req.body.sitio
-    ]);
-    res.json("Ok");
-};
-
 module.exports = controller;

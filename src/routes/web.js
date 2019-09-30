@@ -12,7 +12,6 @@ router.get('/delete/:id', customerController.delete);
 const dashboardController = require(path.join('..','controllers','dashboardController'));
 
 router.get('/editsite/:hotelId', dashboardController.editsite);
-router.post('/salvarMovimientos', dashboardController.salvarMovimientos);
 
 const homeController = require(path.join('..','controllers','homeController'));
 
