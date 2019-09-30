@@ -60,27 +60,17 @@
 
     var hotel_id = {{ hotel.id }};
 
-    socket.emit('init', {
+    $(window).load(function() {
 
-        hotel_id: hotel_id
+      socket.emit('init', {
 
-    });
+          hotel_id: hotel_id
 
-    $(function() {
+      });
 
       $("#equipos").select2({
         placeholder: 'Ninguno',
         allowClear: true
-      });
-
-      $( "#mapa" ).draggable({
-        containment: "#containment-wrapper"
-        });
-
-      $( "#mapa" ).resizable({
-        containment: "#containment-wrapper",
-        minHeight: 250,
-        minWidth: 400
       });
 
     });
@@ -89,30 +79,38 @@
   <script src="/js/dashboard/context-menu.js"></script>
   <script src="/js/dashboard/areas.js"></script>
   <script>
-    $(function() {
+    $(window).load(function() {
 
       //Script Movimientos
 
-      $(window).resize(function(){
+      var width = {{ hotel.width }};
+      var height = {{ hotel.height }};
+      var left = {{ hotel.left }};
+      var top = {{ hotel.top }};
 
-        var alto=$(window).height();
-        var ancho=$(window).width();
-
-        console.log("alto: "+alto+" ancho:"+ancho);
-
-      });
-
-      $("#mapa").css("left", "{{ hotel.left }}%");
-      $("#mapa").css("top", "{{ hotel.top }}%");
-      $("#mapa").css("width", "{{ hotel.width }}%");
-      $("#mapa").css("height", "{{ hotel.height }}%");
-      $("#mapa").css("background-image","linear-gradient(rgba(0, 0, 0, 0.350),rgba(0, 0,0, 0.350)),url('{{ hotel.mapa }}')");
+      $("#mapa").css("width", width + "%");
+      $("#mapa").css("height", height + "%");
+      $("#mapa").css("left", left + "%");
+      $("#mapa").css("top", top + "%");
+      $("#mapa").css("background-image", "linear-gradient(rgba(0, 0, 0, 0.350), rgba(0, 0,0, 0.350)), url('{{ hotel.mapa }}')");
       $("#mapa").css("background-position", "center center");
       $("#mapa").css("background-repeat", "no-repeat");
       $("#mapa").css("background-size", "100% 100%");
       $("#mapa").css("background-color", "black");
 
-      $("#salvarMovimientos").click(function() {
+      $( "#mapa" ).draggable({
+        containment: "#containment-wrapper",
+        stop: function(e, ui) { ajustarMapa(); }
+      });
+
+      $( "#mapa" ).resizable({
+        containment: "#containment-wrapper",
+        minHeight: 250,
+        minWidth: 400,
+        stop: function(e, ui) { ajustarMapa(); }
+      });
+
+      function ajustarMapa() {
 
         var anchoBase = $("#containment-wrapper").width();
         var largoBase = $("#containment-wrapper").height();
@@ -122,10 +120,20 @@
         var topMapa = $("#mapa").css("top").split("px")[0];
         if(parseInt(leftMapa) < 0) leftMapa = 0;
         if(parseInt(topMapa) < 0) topMapa = 0;
-        var width = Math.round(((anchoMapa * 100)/anchoBase));
-        var height = Math.round(((largoMapa * 100)/largoBase));
-        var left = Math.round(((leftMapa * 100)/anchoBase));
-        var top = Math.round(((topMapa * 100)/largoBase));
+
+        width = Math.ceil(((anchoMapa * 100) / anchoBase));
+        height = Math.ceil(((largoMapa * 100) / largoBase));
+        left = Math.ceil(((leftMapa * 100) / anchoBase));
+        top = Math.ceil(((topMapa * 100) / largoBase));
+
+        $("#mapa").css("width", width + "%");
+        $("#mapa").css("height", height + "%");
+        $("#mapa").css("left", left + "%");
+        $("#mapa").css("top", top + "%");
+
+      }
+
+      $("#salvarMovimientos").click(function() {
 
         $.ajax({
 
@@ -138,7 +146,7 @@
             error: function (data) {
               alert("Error crítico!!!");
             }
-            
+
         });
 
       });

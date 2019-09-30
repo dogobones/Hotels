@@ -1,4 +1,4 @@
-$(function() {
+$(window).load(function() {
 
   $.contextMenu({
       selector: '.ui-widget-content',
@@ -15,7 +15,7 @@ $(function() {
       }
   });
 
-  $('.ui-widget-content').on('click', function(e){
+  $('.ui-widget-content').on('click', function(e) {
       console.log('clicked', this);
   });
 

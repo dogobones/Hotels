@@ -1,4 +1,4 @@
-$(function() {
+$(window).load(function() {
 
   socket.on('actualizarAreas', function(areas) {
 
@@ -25,7 +25,7 @@ $(function() {
 
   function actualizarAreas(areas) {
 
-    $("#mapa").html(""); //Mejor añado sólo la nueva área no??? maybe...
+    //$("#mapa").html(""); //Mejor añado sólo la nueva área no??? maybe...
 
     areas.forEach(function(area) {
 
@@ -45,6 +45,8 @@ $(function() {
       $("#piso"+area.id).append("<div style='font-weight: bold; text-align: left; font-size: 24px;'><p style='line-height : 24px;'>"+area.nombre+"</p></div>");
 
       //Asignar posiciones...
+      
+      console.log(area);
 
     });
 
