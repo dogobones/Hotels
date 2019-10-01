@@ -31,7 +31,7 @@ $(window).load(function() {
 
       $("#area"+area.id ).remove();
 
-      $("#mapa").append( "<div id='area"+area.id+"' class='ui-widget-content resizable blink' style='overflow: hidden; background-color:#63B76C; border-color:#3AA655;'></div>" );
+      $("#mapa").append( "<div id='area"+area.id+"' class='ui-widget-content resizable blink' style='overflow: hidden;'></div>" );
 
       $(".resizable").draggable({
         containment: "#mapa",
@@ -46,12 +46,14 @@ $(window).load(function() {
         stop: function(e, ui) { ajustarArea($(this).attr("id"), 2); }
       });
 
-      $("#area"+area.id).append("<div style='font-weight: bold; text-align: left; font-size: 24px;'><p style='line-height : 24px;'>"+area.nombre+"</p></div>");
+      $("#area"+area.id).append("<div style='font-weight: bold; text-align: left; font-size: 30%;'><p style='line-height : 24px;'>"+area.nombre+"</p></div>");
 
       $("#area"+area.id).css("width", area.width + "%");
       $("#area"+area.id).css("height", area.height + "%");
       $("#area"+area.id).css("left", area.left + "%");
       $("#area"+area.id).css("top", area.top + "%");
+      $("#area"+area.id).css("background-color", area.color);
+      $("#area"+area.id).css("border", "2px solid " + area.border);
 
     });
 

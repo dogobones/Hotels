@@ -20,8 +20,24 @@ module.exports = io => {
 
         socket.on('nuevaArea', async (data) => {
 
-          await pool.query("INSERT INTO Areas (nombre, estado, hotel_id) VALUES (?, ?, ?)", [
-            data.nombre, data.estado, data.hotel_id
+          var color, border;
+
+          switch(data.estado) {
+            case "0":
+              color = "#f9152f";
+              border = "darked";
+              break;
+            case "1":
+              color = "#4dfd60";
+              border = "green";
+              break;
+            case "2":
+              color = "#fcf73b";
+              border = "orange";
+          }
+
+          await pool.query("INSERT INTO Areas (nombre, estado, hotel_id, color, border) VALUES (?, ?, ?, ?, ?)", [
+            data.nombre, data.estado, data.hotel_id, color, border
           ]);
 
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
@@ -44,8 +60,10 @@ module.exports = io => {
 
           }
 
+          const hotel = await pool.query("SELECT * FROM Hoteles WHERE id = ?", data.sitio);
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.sitio);
 
+          socket.broadcast.to(data.sitio).emit('actualizarMapa', hotel);
           socket.broadcast.to(data.sitio).emit('actualizarAreas', areas);
 
         });

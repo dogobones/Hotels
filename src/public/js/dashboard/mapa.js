@@ -1,14 +1,6 @@
 $(window).load(function() {
 
-  $("#mapa").css("width", width + "%");
-  $("#mapa").css("height", height + "%");
-  $("#mapa").css("left", left + "%");
-  $("#mapa").css("top", _top + "%");
-  $("#mapa").css("background-image", "linear-gradient(rgba(0, 0, 0, 0.350), rgba(0, 0,0, 0.350)), url(" + hotel_mapa + ")");
-  $("#mapa").css("background-position", "center center");
-  $("#mapa").css("background-repeat", "no-repeat");
-  $("#mapa").css("background-size", "100% 100%");
-  $("#mapa").css("background-color", "black");
+  actualizarMapa();
 
   $( "#mapa" ).draggable({
     containment: "#containment-wrapper",
@@ -21,6 +13,32 @@ $(window).load(function() {
     minWidth: 400,
     stop: function(e, ui) { ajustarMapa(2); }
   });
+
+  socket.on('actualizarMapa', function(hotel) {
+
+    width = hotel[0].width;
+    height = hotel[0].height;
+    left = hotel[0].left;
+    _top = hotel[0].top;
+    hotel_mapa = hotel[0].mapa;
+
+    actualizarMapa();
+
+  });
+
+  function actualizarMapa() {
+
+    $("#mapa").css("width", width + "%");
+    $("#mapa").css("height", height + "%");
+    $("#mapa").css("left", left + "%");
+    $("#mapa").css("top", _top + "%");
+    $("#mapa").css("background-image", "linear-gradient(rgba(0, 0, 0, 0.350), rgba(0, 0,0, 0.350)), url(" + hotel_mapa + ")");
+    $("#mapa").css("background-position", "center center");
+    $("#mapa").css("background-repeat", "no-repeat");
+    $("#mapa").css("background-size", "100% 100%");
+    $("#mapa").css("background-color", "black");
+
+  }
 
   function ajustarMapa(action) {
 
