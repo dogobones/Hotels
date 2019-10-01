@@ -33,11 +33,20 @@ module.exports = io => {
         socket.on('sincronizacion', async (data) => {
 
           await pool.query("UPDATE Hoteles SET `left` = ?, top = ?, width = ?, height = ? WHERE id = ?", [
-            data.left, data.top, datay.width, data.height, data.sitio
+            data.left, data._top, data.width, data.height, data.sitio
           ]);
-          console.log(data.allAreas);
 
-          //io.in(data.hotel_id).emit('actualizarAreas', areas);
+          for(var i = 0; i < data.allAreas.length ; i++) {
+
+            await pool.query("UPDATE Areas SET `left` = ?, top = ?, width = ?, height = ? WHERE id = ?", [
+              data.allAreas[i].left, data.allAreas[i].top, data.allAreas[i].width, data.allAreas[i].height, data.allAreas[i].id
+            ]);
+
+          }
+
+          const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.sitio);
+
+          socket.broadcast.to(data.sitio).emit('actualizarAreas', areas);
 
         });
 

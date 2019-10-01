@@ -25,11 +25,11 @@ $(window).load(function() {
 
   function actualizarAreas(areas) {
 
-    //$("#mapa").empty(); //Mejor añado sólo la nueva área no??? maybe...
-
     allAreas = areas;
 
     areas.forEach(function(area) {
+
+      $("#area"+area.id ).remove();
 
       $("#mapa").append( "<div id='area"+area.id+"' class='ui-widget-content resizable blink' style='overflow: hidden; background-color:#63B76C; border-color:#3AA655;'></div>" );
 
