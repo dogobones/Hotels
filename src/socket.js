@@ -20,24 +20,20 @@ module.exports = io => {
 
         socket.on('nuevaArea', async (data) => {
 
-          var color, border;
-
-          switch(data.estado) {
-            case "0":
-              color = "#f9152f";
-              border = "darked";
-              break;
-            case "1":
-              color = "#4dfd60";
-              border = "green";
-              break;
-            case "2":
-              color = "#fcf73b";
-              border = "orange";
-          }
-
           await pool.query("INSERT INTO Areas (nombre, estado, hotel_id, color, border) VALUES (?, ?, ?, ?, ?)", [
-            data.nombre, data.estado, data.hotel_id, color, border
+            data.nombre, data.estado, data.hotel_id, colores(data.estado)[0], colores(data.estado)[1]
+          ]);
+
+          const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+
+          io.in(data.hotel_id).emit('actualizarAreas', areas);
+
+        });
+
+        socket.on('nuevoEstado', async (data) => {
+
+          await pool.query("UPDATE Areas SET estado = ?, color = ?, border = ? WHERE id = ?", [
+            data.estado, colores(data.estado)[0], colores(data.estado)[1], data.area
           ]);
 
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
@@ -73,6 +69,28 @@ module.exports = io => {
             console.log('User down: ', socket.id);
 
         });
+
+        function colores(estado) {
+
+          var color, border;
+
+          switch(estado) {
+            case "0":
+              color = "#f9152f";
+              border = "darkred";
+              break;
+            case "1":
+              color = "#4dfd60";
+              border = "green";
+              break;
+            case "2":
+              color = "#fcf73b";
+              border = "orange";
+          }
+
+          return [color, border];
+
+        }
 
         /*socket.on('turnReady', async (action) => {
 

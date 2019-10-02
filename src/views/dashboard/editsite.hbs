@@ -1,19 +1,20 @@
 <div class="row pl-3 pr-3">
   <div class="mx-auto pb-2">
-    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar área</button>
+    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar habitación</button>
     <button type="button" class="btn btn-sm btn-outline-warning"><i class="fas fa-th-list"></i> Vista general</button>
-    <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info"><i class="fas fa-arrows-alt"></i> Sincronizar cambios</button>
+    <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info"><i class="fas fa-arrows-alt"></i> Sincronizar movimientos</button>
   </div>
   <div id="containment-wrapper" style="width: 100%; height: 78vh; min-height: 400px;">
     <div id="mapa" style="border-radius: 10px; border: 2px solid #333333;">
 
     </div>
   </div>
+  <!-- AgregarArea -->
   <div class="modal fade" id="AgregarArea" tabindex="-1" role="dialog" aria-labelledby="AgregarAreaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="AgregarAreaLabel"><i class="fas fa-plus-square"></i> Agregar área</h5>
+          <h5 class="modal-title" id="AgregarAreaLabel"><i class="fas fa-plus-square"></i> Agregar habitación</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -23,21 +24,21 @@
   		  <div class="input-group-prepend">
   			<span class="input-group-text">Nombre:</span>
   		  </div>
-  		  <input id="nombreArea" type="text" class="form-control" placeholder="Nombre del área" aria-label="Nombre del área">
+  		  <input id="nombreArea" type="text" class="form-control" placeholder="Nombre o número de la habitación" aria-label="Nombre o número de la habitación">
   		</div>
   		<div class="input-group mb-3">
   		  <div class="input-group-prepend">
   			<span class="input-group-text">Estado actual:</span>
   		  </div>
         <select id="estado" class="form-control">
-  		    <option value="1" selected>Dispinible</option>
+  		    <option value="1" selected>Disponible</option>
   		    <option value="2">Ocupada</option>
   		    <option value="0">No disponible</option>
   		  </select>
   		</div>
   		<div class="input-group mb-3">
   		  <div class="input-group-prepend">
-  			<span class="input-group-text">Equipos activos en el área:</span>
+  			<span class="input-group-text">Equipos activos en la habitación:</span>
   		  </div>
   		  <select id="equipos" class="form-control" style="width: 100%;" multiple="multiple">
   		    <option>Antena número 1</option>
@@ -49,6 +50,35 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button id="AgregarAreaButton" type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CambiarEstado -->
+  <div class="modal fade" id="CambiarEstado" tabindex="-1" role="dialog" aria-labelledby="CambiarEstadoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CambiarEstadoLabel"><i class="fas fa-sync-alt"></i> Cambiar estado</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      		<div class="input-group mb-3">
+      		  <div class="input-group-prepend">
+      			<span class="input-group-text">Nuevo estado:</span>
+      		  </div>
+            <select id="nuevoEstado" class="form-control">
+      		    <option value="1" selected>Disponible</option>
+      		    <option value="2">Ocupada</option>
+      		    <option value="0">No disponible</option>
+      		  </select>
+      		</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button id="CambiarEstadoButton" type="button" class="btn btn-primary">Confirmar</button>
         </div>
       </div>
     </div>
