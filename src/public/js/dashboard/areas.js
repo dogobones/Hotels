@@ -27,9 +27,9 @@ $(window).load(function() {
 
     allAreas = areas;
 
-    areas.forEach(function(area) {
+    $(".blink").remove();
 
-      $("#area"+area.id ).remove();
+    areas.forEach(function(area) {
 
       $("#mapa").append( "<div id='area"+area.id+"' class='ui-widget-content resizable blink' style='overflow: hidden;'></div>" );
 

@@ -42,6 +42,16 @@ module.exports = io => {
 
         });
 
+        socket.on('eliminarArea', async (data) => {
+
+          await pool.query("DELETE FROM Areas WHERE id = ?", data.area);
+
+          const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+
+          io.in(data.hotel_id).emit('actualizarAreas', areas);
+
+        });
+
         socket.on('sincronizacion', async (data) => {
 
           await pool.query("UPDATE Hoteles SET `left` = ?, top = ?, width = ?, height = ? WHERE id = ?", [

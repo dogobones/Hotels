@@ -24,6 +24,12 @@ $(window).load(function() {
 
               break;
 
+            case "eliminar":
+
+              $("#EliminarArea").modal("show");
+
+              break;
+
           }
 
       },
@@ -33,15 +39,15 @@ $(window).load(function() {
           "estado": {name: "Cambiar estado", icon: "fas fa-sync-alt"},
           "equipos": {name: "Gestionar equipos", icon: "fas fa-broadcast-tower"},
           "split": "---------",
-          "eliminar": {name: "Eliminar área", icon: "fas fa-trash-alt"}
+          "eliminar": {name: "Eliminar habitación", icon: "fas fa-trash-alt"}
       }
   });
 
-  $("#CambiarEstadoButton").click(async function() {
+  $("#CambiarEstadoButton").click(function() {
 
     var estado = $("#nuevoEstado").val();
 
-    await socket.emit('nuevoEstado', {
+    socket.emit('nuevoEstado', {
 
       estado: estado,
       area: areaActual[0].id,
@@ -50,6 +56,19 @@ $(window).load(function() {
     });
 
     $("#CambiarEstado").modal("hide");
+
+  });
+
+  $("#EliminarAreaButton").click(function() {
+
+    socket.emit('eliminarArea', {
+
+      area: areaActual[0].id,
+      hotel_id: hotel_id
+
+    });
+
+    $("#EliminarArea").modal("hide");
 
   });
 
