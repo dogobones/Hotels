@@ -11,8 +11,8 @@ $('#Escogersitio').click(function(){
     success:function(data){
       //console.log(data);
       $('#sitesContainer').html('');
-      data.forEach(function(element){  
-        $("#sitesContainer").append( "<div id="+element.id+" class='empresa p-1 "+element.nombre+ "'  ><img class='BnW' style='width:9.4em; height: 9.4em' src= "+element.logo+" alt=''></div>" );
+      data.forEach(function(element){
+        $("#sitesContainer").append( "<div id="+element.id+" class='empresa m-1  "+element.nombre+ "' ><img class='BnW ' style='width:9.4em; height:9.4em' src= "+element.logo+" alt=''></div>" );
         $('.BnW').on('error',function(){
           $(this).attr('src','/img/logos/DefaultLogo.png');
 
@@ -33,27 +33,55 @@ $('#Escogersitio').click(function(){
     }
   });
 });
-/*  $('#LogoFile').on('change',function(){
-  var fileInput = $('#LogoFile');
-  fileValidation(fileInput);
-});*/
 
+var oklogo,okmapa;
+ $('#LogoFile').on('change',function(){
+   var fileInput = $('#LogoFile');
+   var filePath = $('#LogoFile').value;
+    var size=$('#LogoFile')[0].files[0].size;
+   console.log(size);
+   var extension=$('#LogoFile').val().replace(/^.*\./, '');
 
+   if(extension != 'jpg'&& extension != 'jpeg' && extension != 'png'){
+     console.log("Archivo incorrecto "+ extension +" No es valido");
+     $('#lblogo').removeClass('btn-warning');
+     $('#lblogo').addClass('btn-danger');
+     $('#txtLogo').text('Seleccione otro archivo');
+     oklogo=false;
+     return false;
+   }else{
+     console.log("Correcto");
+     $('#lblogo').removeClass('btn-danger');
+     $('#lblogo').removeClass('btn-warning');
+     $('#lblogo').addClass('btn-success');
+     $('#txtLogo').text('Logo cargado');
+     oklogo=true;
+   }
 });
 
-function fileValidation(fileInput){
-var fileInput = $('#LogoFile');
-var filePath = $('#LogoFile').value;
- var size=$('#LogoFile')[0].files[0].size;
-console.log(size);
-var extension=$('#LogoFile').val().replace(/^.*\./, '');
+$('#MapFile').on('change',function(){
+  var fileInput = $('#MapFile');
+  var filePath = $('#MapFile').value;
+  var extension=$('#MapFile').val().replace(/^.*\./, '');
 
-if(extension != 'jpg'&& extension != 'jpeg' && extension != 'png'){
-  console.log("Archivo incorrecto "+ extension +" No es valido");
+  if(extension != 'jpg'&& extension != 'jpeg' && extension != 'png'){
+    console.log("Archivo incorrecto "+ extension +" No es valido");
+    $('#lbmap').removeClass('btn-warning');
+    $('#lbmap').addClass('btn-danger');
+    $('#txtMap').text('Seleccione otro archivo');
+    okmapa=false;
 
-  return false;
-}else{
-  console.log("Correcto");
+    return false;
+  }else{
+    console.log("Correcto");
+    var size=$('#MapFile')[0].files[0].size;
+   //console.log(size);
+    $('#lbmap').removeClass('btn-danger');
+    $('#lbmap').removeClass('btn-warning');
+    $('#lbmap').addClass('btn-success');
+    $('#txtMap').text('Mapa cargado ('+size+'Kb)');
+    okmapa=true;
+  }
+});
 
-}
-}
+});

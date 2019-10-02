@@ -38,23 +38,23 @@
         <div class="input-group-prepend">
         <span class="input-group-text">Nombre:</span>
         </div>
-        <input id="nombreSitio" name="nombreSitio"type="text" class="form-control" placeholder="Nombre del sitio" aria-label="Nombre del área">
+        <input id="nombreSitio" name="nombreSitio"type="text" class="form-control" placeholder="Nombre del sitio" aria-label="Nombre del área" required>
       </div>
       <div class="mb-3">
-        <label for="LogoFile" class="file-upload btn btn-warning btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccione el logo..
-            <input id="LogoFile" name="LogoFile" type="file">
+        <label id="lblogo" for="LogoFile" class="file-upload btn btn-warning btn-block rounded-pill shadow"><span id="txtLogo"><i class="fa fa-upload mr-2"></i>Seleccione el logo..</span>
+            <input id="LogoFile" name="LogoFile" type="file" >
         </label>
       </div>
       <hr class="separator">
       <div class="input-group mb-3">
-        <label for="MapFile" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Seleccionar el mapa...
-            <input id="MapFile" name="MapFile" type="file">
+        <label id="lbmap" for="MapFile" class="file-upload btn btn-primary btn-block rounded-pill shadow"> <span id="txtMap"><i class="fa fa-upload mr-2"></i>Seleccionar el mapa...</span>
+            <input id="MapFile" name="MapFile" type="file" >
         </label>
 
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" >Cancelar</button>
       <button type="submit" id="guardarsitio" class="btn btn-primary ui submit" data-html="true" data-tooltip="Al hacer clic se guardaran
        los cambios" data-position="top left">Guardar</button>
     </div>
@@ -112,6 +112,8 @@ $(function(){
       $('#sitesContainer > div').not(select).hide();
     }
   });
+//---------------------------
+
 
 });
 </script>
