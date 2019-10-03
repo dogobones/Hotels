@@ -16,6 +16,14 @@ $(window).load(function() {
 
           switch(key) {
 
+            case "nombre":
+
+              $("#nuevoNombre").val(areaActual[0].nombre);
+
+              $("#CambiarNombre").modal("show");
+
+              break;
+
             case "estado":
 
               $("#nuevoEstado").val(areaActual[0].estado);
@@ -41,6 +49,22 @@ $(window).load(function() {
           "split": "---------",
           "eliminar": {name: "Eliminar habitación", icon: "fas fa-trash-alt"}
       }
+  });
+
+  $("#CambiarNombreButton").click(function() {
+
+    var nombre = $("#nuevoNombre").val();
+
+    socket.emit('nuevoNombre', {
+
+      nombre: nombre,
+      area: areaActual[0].id,
+      hotel_id: hotel_id
+
+    });
+
+    $("#CambiarNombre").modal("hide");
+
   });
 
   $("#CambiarEstadoButton").click(function() {

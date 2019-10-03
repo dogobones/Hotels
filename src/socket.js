@@ -30,6 +30,18 @@ module.exports = io => {
 
         });
 
+        socket.on('nuevoNombre', async (data) => {
+
+          await pool.query("UPDATE Areas SET nombre = ? WHERE id = ?", [
+            data.nombre, data.area
+          ]);
+
+          const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+
+          io.in(data.hotel_id).emit('actualizarAreas', areas);
+
+        });
+
         socket.on('nuevoEstado', async (data) => {
 
           await pool.query("UPDATE Areas SET estado = ?, color = ?, border = ? WHERE id = ?", [

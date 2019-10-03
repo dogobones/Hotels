@@ -46,10 +46,37 @@
   		    <option>Antena de largo alcance</option>
   		  </select>
   		</div>
+      <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button id="AgregarAreaButton" type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CambiarNombre -->
+  <div class="modal fade" id="CambiarNombre" tabindex="-1" role="dialog" aria-labelledby="CambiarNombreLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CambiarNombreLabel"><i class="fas fa-edit"></i> Cambiar nombre</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      		<div class="input-group mb-3">
+      		  <div class="input-group-prepend">
+      			<span class="input-group-text">Nuevo nombre:</span>
+      		  </div>
+  		      <input id="nuevoNombre" type="text" class="form-control" aria-label="Nombre o número de la habitación">
+      		</div>
+          <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button id="CambiarNombreButton" type="button" class="btn btn-primary">Confirmar</button>
         </div>
       </div>
     </div>
@@ -75,6 +102,7 @@
       		    <option value="0">No disponible</option>
       		  </select>
       		</div>
+          <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -96,6 +124,7 @@
         <div class="modal-body text-center">
           <p style="font-weight: bold;">¿Está seguro?<p>
           <p>!Este cambio es permanente y no podrá ser revertido!</p>
+          <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

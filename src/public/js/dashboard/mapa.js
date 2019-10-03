@@ -42,6 +42,9 @@ $(window).load(function() {
 
   function ajustarMapa(action) {
 
+    $("#salvarMovimientos").addClass("active");
+    $(".descartar").removeClass("d-none");
+
     var anchoBase = $("#containment-wrapper").width();
     var largoBase = $("#containment-wrapper").height();
     var anchoMapa = $("#mapa").width();
@@ -71,6 +74,9 @@ $(window).load(function() {
   }
 
   $("#salvarMovimientos").click(function() {
+
+    $("#salvarMovimientos").removeClass("active");
+    $(".descartar").addClass("d-none");
 
     socket.emit('sincronizacion', {
 

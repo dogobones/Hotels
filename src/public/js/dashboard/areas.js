@@ -2,6 +2,9 @@ $(window).load(function() {
 
   socket.on('actualizarAreas', function(areas) {
 
+    $("#salvarMovimientos").removeClass("active");
+    $(".descartar").addClass("d-none");
+
     actualizarAreas(areas);
 
   });
@@ -46,9 +49,11 @@ $(window).load(function() {
         stop: function(e, ui) { ajustarArea($(this).attr("id"), 2); }
       });
 
-      $("#area"+area.id).append("<div style='font-weight: bold; text-align: left; font-size: 30%;'><p style='line-height : 24px;'>"+area.nombre+"</p></div>");
+      $("#area"+area.id).append("<div style='font-family: Helvetica; font-weight: bold; text-align: center;'><p>"+area.nombre+"</p></div>");
 
       $("#area"+area.id).css("width", area.width + "%");
+      $("#area"+area.id).css("font-size", $("#area"+area.id).width() / 6 + "px");
+      $("#area"+area.id).css("line-height", $("#area"+area.id).width() / 6 + "px");
       $("#area"+area.id).css("height", area.height + "%");
       $("#area"+area.id).css("left", area.left + "%");
       $("#area"+area.id).css("top", area.top + "%");
@@ -60,6 +65,9 @@ $(window).load(function() {
   }
 
   function ajustarArea(areaId, action) {
+
+    $("#salvarMovimientos").addClass("active");
+    $(".descartar").removeClass("d-none");
 
     var anchoBase = $("#mapa").width();
     var largoBase = $("#mapa").height();
@@ -90,6 +98,8 @@ $(window).load(function() {
 
     } else {
 
+      $("#" + areaId).css("font-size", $("#"+areaId).width() / 6 + "px");
+      $("#" + areaId).css("line-height", $("#"+areaId).width() / 6 + "px");
       $("#" + areaId).css("width", widthArea + "%");
       $("#" + areaId).css("height", heightArea + 1 + "%");
       res[0].width = widthArea;
@@ -98,5 +108,7 @@ $(window).load(function() {
     }
 
   }
+
+
 
 });
