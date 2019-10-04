@@ -105,16 +105,42 @@ filter: grayscale(0%); /* FF 35+ */
     float: right;
   }
 }
-/* Media Query for Laptops and Desktops */
- @media (max-height: 600px) {
+
+
+/* Media Query for Phones */
+ @media (min-height: 11px) {
    #containment-wrapper{
-     height: 71vh !important;
+     height: 73vh !important;
+   }
+   .area-font-size{
+     font-size: 3px;
    }
  }
- /* Media Query for Laptops and Desktops */
+/* Media Query for Laptops */
+ @media (min-height: 600px) {
+   #containment-wrapper{
+     height: 78vh !important;
+   }
+   .area-font-size{
+     font-size: 8px;
+   }
+ }
+ /* Media Query for Monitors */
   @media (min-height: 900px) {
     #containment-wrapper{
       height: 83vh !important;
+    }
+    .area-font-size{
+      font-size: 11px;
+    }
+  }
+ /* Media Query for Tv's */
+  @media (min-height: 1200px) {
+    #containment-wrapper{
+      height: 88vh !important;
+    }
+    .area-font-size{
+      font-size: 14px;
     }
   }
 

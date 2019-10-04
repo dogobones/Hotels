@@ -1,6 +1,6 @@
 <div class="row pl-3 pr-3">
   <div class="mx-auto pb-2">
-    <button type="button" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar habitación</button>
+    <button type="button" id="agregarHabitacion" class="btn btn-sm btn-outline-success" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Agregar habitación</button>
     <button type="button" class="btn btn-sm btn-outline-warning"><i class="fas fa-th-list"></i> Vista general</button>
     <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info"><i class="fas fa-arrows-alt"></i> Sincronizar movimientos</button>
   </div>
@@ -31,9 +31,9 @@
   			<span class="input-group-text">Estado actual:</span>
   		  </div>
         <select id="estado" class="form-control">
-  		    <option value="1" selected>Disponible</option>
+  		    <option value="1">Disponible</option>
   		    <option value="2">Ocupada</option>
-  		    <option value="0">No disponible</option>
+  		    <option value="0" selected>No disponible</option>
   		  </select>
   		</div>
   		<div class="input-group mb-3">
@@ -135,6 +135,7 @@
   </div>
   <link href="/css/toastr.css" rel="stylesheet">
   <script src="/js/toastr.js"></script>
+  <script src="/js/jquery.ui.touch-punch.min.js"></script>
   <script src="/socket.io/socket.io.js" charset="utf-8"></script>
   <script>
 

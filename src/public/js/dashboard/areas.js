@@ -22,6 +22,7 @@ $(window).load(function() {
 
     $("#AgregarArea").modal("hide");
     $("#nombreArea").val("");
+    $("#estado").val("0");
     $("#equipos").val(null).trigger('change');
 
   });
@@ -38,29 +39,36 @@ $(window).load(function() {
 
       $(".resizable").draggable({
         containment: "#mapa",
-        snap: true,
+        //snap: true,
         stop: function(e, ui) { ajustarArea($(this).attr("id"), 1); }
         });
 
       $(".resizable").resizable({
         containment: "#mapa",
-        minHeight: 40,
-        minWidth: 40,
+        minHeight: 18,
+        minWidth: 18,
         stop: function(e, ui) { ajustarArea($(this).attr("id"), 2); }
       });
 
-      $("#area"+area.id).append("<div style='font-family: Helvetica; font-weight: bold; text-align: center;'><p>"+area.nombre+"</p></div>");
+      $("#area"+area.id).append("<div class='area-font-size' style='font-family: Helvetica; font-weight: bold; text-align: center;'><p>"+area.nombre+"</p></div>");
 
       $("#area"+area.id).css("width", area.width + "%");
-      $("#area"+area.id).css("font-size", $("#area"+area.id).width() / 6 + "px");
-      $("#area"+area.id).css("line-height", $("#area"+area.id).width() / 6 + "px");
+      //$("#area"+area.id).css("font-size", $("#area"+area.id).width() / 6 + "px");
+      //$("#area"+area.id).css("line-height", $("#area"+area.id).width() / 6 + "px");
       $("#area"+area.id).css("height", area.height + "%");
       $("#area"+area.id).css("left", area.left + "%");
       $("#area"+area.id).css("top", area.top + "%");
       $("#area"+area.id).css("background-color", area.color);
-      $("#area"+area.id).css("border", "2px solid " + area.border);
+      $("#area"+area.id).css("border", "0.1vw solid " + area.border);
 
     });
+
+    if($(window).width() < 700) {
+
+      $(".blink").draggable("destroy");
+      $(".blink").resizable("destroy");
+
+    }
 
   }
 
@@ -98,8 +106,8 @@ $(window).load(function() {
 
     } else {
 
-      $("#" + areaId).css("font-size", $("#"+areaId).width() / 6 + "px");
-      $("#" + areaId).css("line-height", $("#"+areaId).width() / 6 + "px");
+      //$("#" + areaId).css("font-size", $("#"+areaId).width() / 6 + "px");
+      //$("#" + areaId).css("line-height", $("#"+areaId).width() / 6 + "px");
       $("#" + areaId).css("width", widthArea + "%");
       $("#" + areaId).css("height", heightArea + 1 + "%");
       res[0].width = widthArea;
@@ -108,7 +116,5 @@ $(window).load(function() {
     }
 
   }
-
-
 
 });

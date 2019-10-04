@@ -4,6 +4,15 @@ $(window).load(function() {
 
   $.contextMenu({
       selector: '.ui-widget-content',
+      trigger: (($(window).width() < 700) ? 'left' : 'right'),
+      events: {
+         show : function(options) {
+           $("#"+this[0].id).css("opacity", "0.5");
+         },
+         hide : function(options) {
+           $("#"+this[0].id).css("opacity", "1");
+         }
+      },
       callback: function(key, options) {
 
         var areaId = this[0].id;

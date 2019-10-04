@@ -2,17 +2,26 @@ $(window).load(function() {
 
   actualizarMapa();
 
-  $( "#mapa" ).draggable({
+  $("#mapa").draggable({
     containment: "#containment-wrapper",
     stop: function(e, ui) { ajustarMapa(1); }
   });
 
-  $( "#mapa" ).resizable({
+  $("#mapa").resizable({
     containment: "#containment-wrapper",
     minHeight: 250,
     minWidth: 400,
     stop: function(e, ui) { ajustarMapa(2); }
   });
+
+  if($(window).width() < 700) {
+
+    $("#agregarHabitacion").attr("disabled", true);
+    $("#salvarMovimientos").attr("disabled", true);
+    $("#mapa").draggable("destroy");
+    $("#mapa").resizable("destroy");
+
+  }
 
   socket.on('actualizarMapa', function(hotel) {
 
