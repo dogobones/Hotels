@@ -9,11 +9,23 @@ module.exports = io => {
 
         socket.on('init', async (data) => {
 
+          const hotel = await pool.query("SELECT * FROM Hoteles WHERE id = ?", data.hotel_id);
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
 
           socket.join(socket.id);
           socket.join(data.hotel_id);
 
+          io.in(socket.id).emit('actualizarMapa', hotel);
+          io.in(socket.id).emit('actualizarAreas', areas);
+
+        });
+
+        socket.on('descartar', async (data) => {
+
+          const hotel = await pool.query("SELECT * FROM Hoteles WHERE id = ?", data.hotel_id);
+          const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+
+          io.in(socket.id).emit('actualizarMapa', hotel);
           io.in(socket.id).emit('actualizarAreas', areas);
 
         });
@@ -83,6 +95,7 @@ module.exports = io => {
 
           socket.broadcast.to(data.sitio).emit('actualizarMapa', hotel);
           socket.broadcast.to(data.sitio).emit('actualizarAreas', areas);
+          socket.broadcast.to(data.sitio).emit('cambiosExternos');
 
         });
 

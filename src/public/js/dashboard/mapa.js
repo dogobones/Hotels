@@ -1,7 +1,5 @@
 $(window).load(function() {
 
-  actualizarMapa();
-
   $("#mapa").draggable({
     containment: "#containment-wrapper",
     stop: function(e, ui) { ajustarMapa(1); }
@@ -51,7 +49,8 @@ $(window).load(function() {
 
   function ajustarMapa(action) {
 
-    $("#salvarMovimientos").addClass("active");
+    $("#salvarMovimientos").removeClass("d-none");
+    $("#descartarMovimientos").removeClass("d-none");
     $(".descartar").removeClass("d-none");
 
     var anchoBase = $("#containment-wrapper").width();
@@ -84,7 +83,8 @@ $(window).load(function() {
 
   $("#salvarMovimientos").click(function() {
 
-    $("#salvarMovimientos").removeClass("active");
+    $("#salvarMovimientos").addClass("d-none");
+    $("#descartarMovimientos").addClass("d-none");
     $(".descartar").addClass("d-none");
 
     socket.emit('sincronizacion', {
@@ -99,6 +99,38 @@ $(window).load(function() {
     });
 
     toastr.success('', '!Mapa sincronizado con éxito!', {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "1500",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    });
+
+  });
+
+  $("#descartarMovimientos").click(function() {
+
+    $("#salvarMovimientos").addClass("d-none");
+    $("#descartarMovimientos").addClass("d-none");
+    $(".descartar").addClass("d-none");
+
+    socket.emit('descartar', {
+
+        hotel_id: hotel_id
+
+    });
+
+    toastr.error('', '!Cambios descartados!', {
       "closeButton": false,
       "debug": false,
       "newestOnTop": false,

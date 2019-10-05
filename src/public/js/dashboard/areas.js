@@ -2,7 +2,8 @@ $(window).load(function() {
 
   socket.on('actualizarAreas', function(areas) {
 
-    $("#salvarMovimientos").removeClass("active");
+    $("#salvarMovimientos").addClass("d-none");
+    $("#descartarMovimientos").addClass("d-none");
     $(".descartar").addClass("d-none");
 
     actualizarAreas(areas);
@@ -74,7 +75,8 @@ $(window).load(function() {
 
   function ajustarArea(areaId, action) {
 
-    $("#salvarMovimientos").addClass("active");
+    $("#salvarMovimientos").removeClass("d-none");
+    $("#descartarMovimientos").removeClass("d-none");
     $(".descartar").removeClass("d-none");
 
     var anchoBase = $("#mapa").width();
