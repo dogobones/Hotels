@@ -14,10 +14,12 @@ $(window).load(function() {
 
   if($(window).width() < 700) {
 
-    $("#agregarHabitacion").attr("disabled", true);
-    $("#salvarMovimientos").attr("disabled", true);
     $("#mapa").draggable("destroy");
     $("#mapa").resizable("destroy");
+
+  } else  {
+
+    $("#agregarHabitacion").removeClass("d-none");
 
   }
 
@@ -87,6 +89,20 @@ $(window).load(function() {
     $("#descartarMovimientos").addClass("d-none");
     $(".descartar").addClass("d-none");
 
+    var areasCambiadas = [];
+
+    cambios.forEach(function(id) {
+
+      allAreas.filter(function (area) {
+
+        if(area.id == id) areasCambiadas.push(area);
+
+        return true;
+
+      });
+
+    });
+
     socket.emit('sincronizacion', {
 
         sitio: hotel_id,
@@ -94,7 +110,7 @@ $(window).load(function() {
         height: height,
         left: left,
         _top: _top,
-        allAreas: allAreas
+        allAreas: areasCambiadas
 
     });
 

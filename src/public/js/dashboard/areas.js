@@ -31,6 +31,7 @@ $(window).load(function() {
   function actualizarAreas(areas) {
 
     allAreas = areas;
+    cambios = [];
 
     $(".blink").remove();
 
@@ -116,6 +117,8 @@ $(window).load(function() {
       res[0].height = heightArea + 1;
 
     }
+
+    if(cambios.indexOf(res[0].id) < 0) cambios.push(res[0].id);
 
   }
 

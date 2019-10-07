@@ -4,8 +4,10 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const socketio = require('socket.io');
 const fileupload = require('express-fileupload');
-
+const helmet = require('helmet');
 const app = express();
+
+//We should use an ORM and CSRF...
 
 require('dotenv').config();
 
@@ -26,6 +28,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // Middlewares
+app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());

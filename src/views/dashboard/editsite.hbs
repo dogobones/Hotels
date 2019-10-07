@@ -1,6 +1,6 @@
 <div class="row pl-3 pr-3">
   <div class="mx-auto pb-2">
-    <button type="button" id="agregarHabitacion" class="btn btn-sm btn-outline-success font-weight-bold" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Nueva habitación</button>
+    <button type="button" id="agregarHabitacion" class="btn btn-sm btn-outline-success font-weight-bold d-none" data-toggle="modal" data-target="#AgregarArea" ><i class="fas fa-clone"></i> Nueva habitación</button>
     <button type="button" class="btn btn-sm btn-outline-warning font-weight-bold"><i class="fas fa-th-list"></i> Vista general</button>
     <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info font-weight-bold d-none"><i class="fas fa-expand-arrows-alt"></i> Sincronizar</button>
     <button type="button" id="descartarMovimientos" class="btn btn-sm btn-outline-danger font-weight-bold d-none"><i class="fas fa-compress-arrows-alt"></i> Descartar</button>
@@ -161,6 +161,7 @@
     var hotel_mapa = "{{ hotel.mapa }}";
 
     var allAreas = null;
+    var cambios = [];
 
     $(window).load(function() {
 
