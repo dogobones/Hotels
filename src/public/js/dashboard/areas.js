@@ -14,17 +14,20 @@ $(window).load(function() {
 
     var nombre = $("#nombreArea").val();
     var estado = $("#estado").val();
+    var piso = $("#pisoAgregarArea").val();
+
+    if(piso == null) piso = "Piso 1";
 
     socket.emit('nuevaArea', {
       nombre: nombre,
       estado: estado,
-      hotel_id: hotel_id
+      hotel_id: hotel_id,
+      piso: piso
     });
 
     $("#AgregarArea").modal("hide");
     $("#nombreArea").val("");
     $("#estado").val("0");
-    $("#equipos").val(null).trigger('change');
 
   });
 

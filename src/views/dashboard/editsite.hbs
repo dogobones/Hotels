@@ -35,7 +35,7 @@
   			<span class="input-group-text">Ubicación (Nombre o número del piso):</span>
   		  </div>
         <select id="pisoAgregarArea" class="form-control" style="width: 100%;">
-  		    <option value="1" selected="selected">Piso 1</option>
+
   		  </select>
   		</div>
   		<div class="input-group mb-3">
@@ -194,6 +194,8 @@
       });
 
       $("#pisoAgregarArea").select2({
+        dropdownParent: $('#AgregarArea'),
+        placeholder: 'Piso 1',
         tags: true
       });
 
@@ -208,4 +210,5 @@
   <script src="/js/dashboard/context-menu.js"></script>
   <script src="/js/dashboard/mapa.js"></script>
   <script src="/js/dashboard/areas.js"></script>
+  <script src="/js/dashboard/pisos.js"></script>
 </div>

@@ -11,12 +11,14 @@ module.exports = io => {
 
           const hotel = await pool.query("SELECT * FROM Hoteles WHERE id = ?", data.hotel_id);
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+          const pisos = await pool.query("SELECT DISTINCT piso FROM Areas WHERE hotel_id = ? ORDER BY `piso` ASC", data.hotel_id);
 
           socket.join(socket.id);
           socket.join(data.hotel_id);
 
           io.in(socket.id).emit('actualizarMapa', hotel);
           io.in(socket.id).emit('actualizarAreas', areas);
+          io.in(socket.id).emit('actualizarPisos', pisos);
 
         });
 
@@ -32,13 +34,15 @@ module.exports = io => {
 
         socket.on('nuevaArea', async (data) => {
 
-          await pool.query("INSERT INTO Areas (nombre, estado, hotel_id, color, border) VALUES (?, ?, ?, ?, ?)", [
-            data.nombre, data.estado, data.hotel_id, colores(data.estado)[0], colores(data.estado)[1]
+          await pool.query("INSERT INTO Areas (nombre, estado, hotel_id, color, border, piso) VALUES (?, ?, ?, ?, ?, ?)", [
+            data.nombre, data.estado, data.hotel_id, colores(data.estado)[0], colores(data.estado)[1], data.piso
           ]);
 
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+          const pisos = await pool.query("SELECT DISTINCT piso FROM Areas WHERE hotel_id = ? ORDER BY `piso` ASC", data.hotel_id);
 
           io.in(data.hotel_id).emit('actualizarAreas', areas);
+          io.in(data.hotel_id).emit('actualizarPisos', pisos);
 
         });
 
@@ -71,8 +75,10 @@ module.exports = io => {
           await pool.query("DELETE FROM Areas WHERE id = ?", data.area);
 
           const areas = await pool.query("SELECT * FROM Areas WHERE hotel_id = ?", data.hotel_id);
+          const pisos = await pool.query("SELECT DISTINCT piso FROM Areas WHERE hotel_id = ? ORDER BY `piso` ASC", data.hotel_id);
 
           io.in(data.hotel_id).emit('actualizarAreas', areas);
+          io.in(data.hotel_id).emit('actualizarPisos', pisos);
 
         });
 
