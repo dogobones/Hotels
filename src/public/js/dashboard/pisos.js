@@ -1,7 +1,8 @@
 $(window).load(function() {
 
-  var defaultPiso = true;
   var allPisos = [];
+  var defaultPiso = true;
+  var preventLoop = true;
 
   socket.on('actualizarPisos', function(pisos) {
 
@@ -31,7 +32,7 @@ $(window).load(function() {
     } else {
 
       allPisos.push("Piso 1");
-      
+
       pisoActual = allPisos[0];
 
       $("#pisoAgregarArea").append("<option>Piso 1</option>");
@@ -61,6 +62,16 @@ $(window).load(function() {
 
     $("#piso").html("<i class='fas fa-building'></i> " + pisoActual);
 
+    $("#pisoAgregarArea").val(pisoActual);
+    $("#cambiarPiso").val(pisoActual);
+
+    preventLoop = true;
+
+    $("#pisoAgregarArea").trigger('change');
+    $("#cambiarPiso").trigger('change');
+
+    preventLoop = false;
+
   }
 
   $("#leftPiso").click(function() {
@@ -79,11 +90,15 @@ $(window).load(function() {
 
   $("#cambiarPiso").on('change', function() {
 
-    pisoActual = $("#cambiarPiso").val();
+    if(!preventLoop) {
 
-    $("#ElegirPiso").modal("hide");
+      pisoActual = $("#cambiarPiso").val();
 
-    areasDelPiso();
+      $("#ElegirPiso").modal("hide");
+
+      areasDelPiso();
+
+    }
 
   });
 

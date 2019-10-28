@@ -42,7 +42,7 @@ $(window).load(function() {
 
     areas.forEach(function(area) {
 
-      $("#mapa").append( "<div id='area"+area.id+"' class='ui-widget-content resizable blink' style='overflow: hidden;'></div>" );
+      $("#mapa").append( "<div id='area"+area.id+"' class='ui-widget-content resizable blink d-none' style='overflow: hidden;'></div>" );
 
       $(".resizable").draggable({
         containment: "#mapa",
@@ -76,6 +76,12 @@ $(window).load(function() {
       $(".blink").resizable("destroy");
 
     }
+
+    socket.emit('actualizarPisos', {
+
+        hotel_id: hotel_id
+
+    });
 
   }
 
