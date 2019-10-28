@@ -1,16 +1,103 @@
 $(window).load(function() {
 
+  var defaultPiso = true;
+  var allPisos = [];
+
   socket.on('actualizarPisos', function(pisos) {
 
     $("#pisoAgregarArea").html("");
+    $("#cambiarPiso").html("");
 
-    pisos.forEach(function(piso) {
+    allPisos = [];
 
-      $("#pisoAgregarArea").append("<option>"+piso.piso+"</option>");
+    if(pisos.length > 0) {
+
+      pisos.forEach(function(piso) {
+
+        allPisos.push(piso.piso);
+
+        $("#pisoAgregarArea").append("<option>"+piso.piso+"</option>");
+        $("#cambiarPiso").append("<option>"+piso.piso+"</option>");
+
+      });
+
+      if(defaultPiso || allPisos.indexOf(pisoActual) < 0) {
+
+        pisoActual = allPisos[0];
+        defaultPiso = false;
+
+      }
+
+    } else {
+
+      allPisos.push("Piso 1");
+      
+      pisoActual = allPisos[0];
+
+      $("#pisoAgregarArea").append("<option>Piso 1</option>");
+      $("#cambiarPiso").append("<option>Piso 1</option>");
+
+    }
+
+    areasDelPiso();
+
+  });
+
+  function areasDelPiso() {
+
+    var areas = allAreas.filter(function (area) {
+
+      return area.piso == pisoActual;
 
     });
 
-    //Botón de pisos dinámico, controlar pisos, moverte de piso si ya no hay, etc...
+    $(".blink").addClass("d-none");
+
+    areas.forEach(function(area) {
+
+      $("#area"+area.id).removeClass("d-none");
+
+    });
+
+    $("#piso").html("<i class='fas fa-building'></i> " + pisoActual);
+
+  }
+
+  $("#leftPiso").click(function() {
+
+    var index = allPisos.indexOf(pisoActual);
+
+    if(index > 0) {
+
+      pisoActual = allPisos[index - 1];
+
+      areasDelPiso();
+
+    }
+
+  });
+
+  $("#cambiarPiso").on('change', function() {
+
+    pisoActual = $("#cambiarPiso").val();
+
+    $("#ElegirPiso").modal("hide");
+
+    areasDelPiso();
+
+  });
+
+  $("#rightPiso").click(function() {
+
+    var index = allPisos.indexOf(pisoActual);
+
+    if(index < allPisos.length - 1) {
+
+      pisoActual = allPisos[index + 1];
+
+      areasDelPiso();
+
+    }
 
   });
 

@@ -43,6 +43,7 @@ module.exports = io => {
 
           io.in(data.hotel_id).emit('actualizarAreas', areas);
           io.in(data.hotel_id).emit('actualizarPisos', pisos);
+          socket.broadcast.to(data.hotel_id).emit('cambiosExternos');
 
         });
 
@@ -79,6 +80,7 @@ module.exports = io => {
 
           io.in(data.hotel_id).emit('actualizarAreas', areas);
           io.in(data.hotel_id).emit('actualizarPisos', pisos);
+          socket.broadcast.to(data.hotel_id).emit('cambiosExternos');
 
         });
 

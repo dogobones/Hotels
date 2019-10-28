@@ -18,6 +18,8 @@ $(window).load(function() {
 
     if(piso == null) piso = "Piso 1";
 
+    pisoActual = piso;
+
     socket.emit('nuevaArea', {
       nombre: nombre,
       estado: estado,
