@@ -1,19 +1,85 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="generator" content="">
-    <title>Cover· Rooms</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">      
-    <!-- Custom styles for this template -->
-    <link href="/css/cover.css" rel="stylesheet">
-  </head>
-  <body class="">
-    {{> navbar }}
-      {{{body}}}
-    {{> footer }}
-    <script src="/js/general.js" charset="utf-8"></script>
-  </body>
-  </html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="generator" content="">
+  <title>Cover· Rooms</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Custom styles for this template -->
+  <link href="/css/simple-sidebar.css" rel="stylesheet">
+  <link href="/css/cover.css" rel="stylesheet">
+</head>
+
+<body class="">
+  <div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="dark-ui text-white" id="sidebar-wrapper">
+      <div class="sidebar-heading">Hoteles</div>
+      <div class="list-group list-group-flush ">
+        <a href="/" class="list-group-item list-group-item-action dark-ui">Dashboard</a>
+        <a href="/editsite" class="list-group-item list-group-item-action dark-ui">Shortcuts</a>
+        <a href="#" class="list-group-item list-group-item-action dark-ui">Overview</a>
+        <a href="#" class="list-group-item list-group-item-action dark-ui">Events</a>
+        <a href="#" class="list-group-item list-group-item-action dark-ui">Profile</a>
+        <a href="#" class="list-group-item list-group-item-action dark-ui">Status</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <div id="page-content-wrapper">
+
+      <!--Nav bar-->
+      <nav class="navbar navbar-expand-lg navbar-dark dark-ui ">
+        <button class="btn btn-outline-success" id="menu-toggle">☰</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!--End NavBar-->
+      <!--Content page-->
+      <div class="container-fluid">
+        {{> navbar }}
+        {{{body}}}
+        {{> footer }}
+      </div>
+      <!--Content page-->
+
+    </div>
+
+  </div>
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+  <script src="/js/general.js" charset="utf-8"></script>
+</body>
+
+</html>

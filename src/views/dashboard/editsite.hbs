@@ -1,11 +1,11 @@
 <div class="row pl-3 pr-3">
   <div class="mx-auto pb-2">
     <button type="button" id="agregarHabitacion" class="btn btn-sm btn-outline-success font-weight-bold d-none" data-toggle="modal" data-target="#AgregarArea"><i class="fas fa-plus-square"></i> Nueva habitación</button>
-      <button type="button" id="BtnGeneral"class="btn btn-sm btn-outline-warning font-weight-bold" data-toggle="modal" data-target="#VistaGeneral"><i class="fas fa-th-list"></i> Vista general</button>
+    <button type="button" id="BtnGeneral" class="btn btn-sm btn-outline-warning font-weight-bold" data-toggle="modal" data-target="#VistaGeneral"><i class="fas fa-th-list"></i> Vista general</button>
     <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info font-weight-bold d-none"><i class="fas fa-expand-arrows-alt"></i> Sincronizar</button>
     <button type="button" id="descartarMovimientos" class="btn btn-sm btn-outline-danger font-weight-bold d-none"><i class="fas fa-compress-arrows-alt"></i> Descartar</button>
     <button type="button" id="leftPiso" class="btn btn-sm btn-outline-light font-weight-bold"><i class="fas fa-caret-square-left"></i></i></button>
-    <button type="button" id="piso" class="btn btn-sm btn-outline-light font-weight-bold" data-toggle="modal" data-target="#ElegirPiso" >Cargando...</button>
+    <button type="button" id="piso" class="btn btn-sm btn-outline-light font-weight-bold" data-toggle="modal" data-target="#ElegirPiso">Cargando...</button>
     <button type="button" id="rightPiso" class="btn btn-sm btn-outline-light font-weight-bold"><i class="fas fa-caret-square-right"></i></i></button>
   </div>
   <div id="containment-wrapper" style="width: 100%; height: 78vh; min-height: 400px;">
@@ -24,31 +24,31 @@
           </button>
         </div>
         <div class="modal-body">
-  		<div class="input-group mb-3">
-  		  <div class="input-group-prepend">
-  			<span class="input-group-text">Nombre:</span>
-  		  </div>
-  		  <input id="nombreArea" type="text" class="form-control" placeholder="Nombre o número de la habitación" aria-label="Nombre o número de la habitación">
-  		</div>
-  		<div class="input-group mb-3">
-  		  <div class="input-group-prepend">
-  			<span class="input-group-text">Ubicación (Nombre o número del piso):</span>
-  		  </div>
-        <select id="pisoAgregarArea" class="form-control" style="width: 100%;">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Nombre:</span>
+            </div>
+            <input id="nombreArea" type="text" class="form-control" placeholder="Nombre o número de la habitación" aria-label="Nombre o número de la habitación">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Ubicación (Nombre o número del piso):</span>
+            </div>
+            <select id="pisoAgregarArea" class="form-control" style="width: 100%;">
 
-  		  </select>
-  		</div>
-  		<div class="input-group mb-3">
-  		  <div class="input-group-prepend">
-  			<span class="input-group-text">Estado actual:</span>
-  		  </div>
-        <select id="estado" class="form-control">
-  		    <option value="1">Disponible</option>
-  		    <option value="2">Ocupada</option>
-  		    <option value="0" selected>No disponible</option>
-  		  </select>
-  		</div>
-  		<!--<div class="input-group mb-3">
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Estado actual:</span>
+            </div>
+            <select id="estado" class="form-control">
+              <option value="1">Disponible</option>
+              <option value="2">Ocupada</option>
+              <option value="0" selected>No disponible</option>
+            </select>
+          </div>
+          <!--<div class="input-group mb-3">
   		  <div class="input-group-prepend">
   			<span class="input-group-text">Equipos activos en la habitación:</span>
   		  </div>
@@ -58,7 +58,7 @@
   		    <option>Antena de largo alcance</option>
   		  </select>
   		</div>-->
-      <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
+          <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -78,11 +78,11 @@
           </button>
         </div>
         <div class="modal-body">
-      		<div class="input-group mb-3">
+          <div class="input-group mb-3">
             <select id="cambiarPiso" class="form-control" style="width: 100%;">
 
-      		  </select>
-      		</div>
+            </select>
+          </div>
           <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
       </div>
@@ -99,12 +99,12 @@
           </button>
         </div>
         <div class="modal-body">
-      		<div class="input-group mb-3">
-      		  <div class="input-group-prepend">
-      			<span class="input-group-text">Nuevo nombre:</span>
-      		  </div>
-  		      <input id="nuevoNombre" type="text" class="form-control" aria-label="Nombre o número de la habitación">
-      		</div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Nuevo nombre:</span>
+            </div>
+            <input id="nuevoNombre" type="text" class="form-control" aria-label="Nombre o número de la habitación">
+          </div>
           <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
@@ -125,16 +125,16 @@
           </button>
         </div>
         <div class="modal-body">
-      		<div class="input-group mb-3">
-      		  <div class="input-group-prepend">
-      			<span class="input-group-text">Nuevo estado:</span>
-      		  </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Nuevo estado:</span>
+            </div>
             <select id="nuevoEstado" class="form-control">
-      		    <option value="1" selected>Disponible</option>
-      		    <option value="2">Ocupada</option>
-      		    <option value="0">No disponible</option>
-      		  </select>
-      		</div>
+              <option value="1" selected>Disponible</option>
+              <option value="2">Ocupada</option>
+              <option value="0">No disponible</option>
+            </select>
+          </div>
           <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
@@ -156,8 +156,8 @@
         </div>
         <div class="modal-body text-center">
           <p style="font-weight: bold;">¿Está seguro?<p>
-          <p>!Este cambio es permanente y no podrá ser revertido!</p>
-          <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
+              <p>!Este cambio es permanente y no podrá ser revertido!</p>
+              <div class="descartar d-none text-danger text-center">*No has sincronizado tus movimientos en el mapa*</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -177,7 +177,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <table id="lugares" class="table table-sm  table-borderless  w-100" style="" >
+          <table id="lugares" class="table table-sm  table-borderless  w-100" style="">
             <thead>
               <tr>
                 <th>Nombre</th>
@@ -200,8 +200,8 @@
   </div>
 
 
- <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" charset="utf-8"></script>
- <script src="/js/dashboard/vistageneral.js" charset="utf-8"></script>
+  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" charset="utf-8"></script>
+  <script src="/js/dashboard/vistageneral.js" charset="utf-8"></script>
   <link href="/css/toastr.css" rel="stylesheet">
   <script src="/js/toastr.js"></script>
   <script src="/js/jquery.ui.touch-punch.min.js"></script>
@@ -267,7 +267,7 @@
       });*/
 
     });
-  
+
   </script>
   <script src="/js/dashboard/context-menu.js"></script>
   <script src="/js/dashboard/mapa.js"></script>
