@@ -1,7 +1,7 @@
 <div class="row pl-3 pr-3">
   <div class="mx-auto pb-2">
     <button type="button" id="agregarHabitacion" class="btn btn-sm btn-outline-success font-weight-bold d-none" data-toggle="modal" data-target="#AgregarArea"><i class="fas fa-plus-square"></i> Nueva habitación</button>
-    <button type="button" class="btn btn-sm btn-outline-warning font-weight-bold"><i class="fas fa-th-list"></i> Vista general</button>
+      <button type="button" id="BtnGeneral"class="btn btn-sm btn-outline-warning font-weight-bold" data-toggle="modal" data-target="#VistaGeneral"><i class="fas fa-th-list"></i> Vista general</button>
     <button type="button" id="salvarMovimientos" class="btn btn-sm btn-outline-info font-weight-bold d-none"><i class="fas fa-expand-arrows-alt"></i> Sincronizar</button>
     <button type="button" id="descartarMovimientos" class="btn btn-sm btn-outline-danger font-weight-bold d-none"><i class="fas fa-compress-arrows-alt"></i> Descartar</button>
     <button type="button" id="leftPiso" class="btn btn-sm btn-outline-light font-weight-bold"><i class="fas fa-caret-square-left"></i></i></button>
@@ -166,6 +166,42 @@
       </div>
     </div>
   </div>
+  <!--Vista general-->
+  <div class="modal fade" id="VistaGeneral" tabindex="-1" role="dialog" aria-labelledby="VistaGeneralLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title text-white" id="VistaGeneralLabel"><i class="far fa-eye"></i> Vista general</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table id="lugares" class="table table-sm  table-borderless  w-100" style="" >
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Piso</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" charset="utf-8"></script>
+ <script src="/js/dashboard/vistageneral.js" charset="utf-8"></script>
   <link href="/css/toastr.css" rel="stylesheet">
   <script src="/js/toastr.js"></script>
   <script src="/js/jquery.ui.touch-punch.min.js"></script>
@@ -231,7 +267,7 @@
       });*/
 
     });
-
+  
   </script>
   <script src="/js/dashboard/context-menu.js"></script>
   <script src="/js/dashboard/mapa.js"></script>

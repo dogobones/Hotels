@@ -60,6 +60,13 @@ controller.delete = (req, res) => {
     });
   });
 }
+controller.getall = (req,res)=>{
+  req.getConnection((err,connection) =>{
+    connection.query('SELECT * FROM customer WHERE id=?', [id], (err,rows) =>{
+      
+    });
+  });
+}
 
 /*router.get('/', (req, res) => {
 
